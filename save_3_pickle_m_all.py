@@ -12,8 +12,10 @@ import pickle
 
 # time python save_3_pickle.py -c ./canonical_datasets/canonical_dataset_GRCz11.txt -a ./allSS_datasets/allSS_dataset_GRCz11.txt -g ./GRCz11.fa -m ./maxEnt_models/zebrafish/ --prelearned_sres zebrafish --print_predictions
 
-np.random.seed(0)
-print("seed = 0")
+
+my_seed = 1
+np.random.seed(my_seed)
+print(f"seed = {my_seed}")
 
 startTime = time.time()
 
@@ -239,7 +241,7 @@ data = {
 }
 
 # Save the dictionary to a pickle file
-with open('m_pred_all_new.pkl', 'wb') as f:
+with open(f'm_pred_all_new_{my_seed}.pkl', 'wb') as f:
     pickle.dump(data, f)
  
 
@@ -296,8 +298,8 @@ data = {
     'trueThrees_all': trueThrees_all
 }
 
-# Save the dictionary to a pickle file named 'h_predictions_new.pkl'
-with open('m_predictions_new.pkl', 'wb') as f:
+
+with open(f'm_predictions_new_{my_seed}.pkl', 'wb') as f:
     pickle.dump(data, f)
 
 print("Prediction data saved successfully.")
@@ -363,7 +365,7 @@ data = {
 }
 
 # 將字典儲存到 pickle 檔案
-with open('m_new.pkl', 'wb') as f:
+with open(f'm_new.pkl_{my_seed}', 'wb') as f:
     pickle.dump(data, f)
 
 

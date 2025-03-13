@@ -12,8 +12,10 @@ import pickle
 
 # time python save_3_pickle.py -c ./canonical_datasets/canonical_dataset_GRCz11.txt -a ./allSS_datasets/allSS_dataset_GRCz11.txt -g ./GRCz11.fa -m ./maxEnt_models/zebrafish/ --prelearned_sres zebrafish --print_predictions
 
-np.random.seed(0)
-print("seed = 0")
+
+my_seed = 1
+np.random.seed(my_seed)
+print(f"seed = {my_seed}")
 
 startTime = time.time()
 
@@ -239,7 +241,7 @@ sequences = [str(genes[gene].seq) for gene in testGenes]
 # }
 
 # # Save the dictionary to a pickle file
-# with open('h_pred_all_new.pkl', 'wb') as f:
+# with open(f'h_pred_all_new_{my_seed}.pkl', 'wb') as f:
 #     pickle.dump(data, f)
  
 
@@ -296,8 +298,8 @@ sequences = [str(genes[gene].seq) for gene in testGenes]
 #     'trueThrees_all': trueThrees_all
 # }
 
-# # Save the dictionary to a pickle file named 'h_predictions_new.pkl'
-# with open('h_predictions_new.pkl', 'wb') as f:
+
+# with open(f'h_predictions_new_{my_seed}.pkl', 'wb') as f:
 #     pickle.dump(data, f)
 
 # print("Prediction data saved successfully.")
@@ -316,7 +318,7 @@ sequences = [str(genes[gene].seq) for gene in testGenes]
 #############
 
 
-with open('h_pred_all_new.pkl', 'rb') as f:
+with open(f'h_pred_all_new_{my_seed}.pkl', 'rb') as f:
     data_pred_all = pickle.load(f)
 
 
@@ -391,7 +393,7 @@ data = {
 print("data.keys():", data.keys())
 
 # 將字典儲存到 pickle 檔案
-with open('h_new.pkl', 'wb') as f:
+with open(f'h_new_{my_seed}.pkl', 'wb') as f:
     pickle.dump(data, f)
 
 
