@@ -12,7 +12,7 @@ import pickle
 
 # time python save_3_pickle.py -c ./canonical_datasets/canonical_dataset_GRCz11.txt -a ./allSS_datasets/allSS_dataset_GRCz11.txt -g ./GRCz11.fa -m ./maxEnt_models/zebrafish/ --prelearned_sres zebrafish --print_predictions
 
-my_seed = 1
+my_seed = 2
 np.random.seed(my_seed)
 print(f"seed = {my_seed}")
 

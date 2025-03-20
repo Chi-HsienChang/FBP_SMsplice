@@ -10,6 +10,8 @@ from SMsplice import *
 import pickle
 
 
+# time python3 save_3_pickle_m_all.py -c ./canonical_datasets/canonical_dataset_mm10.txt -a ./allSS_datasets/allSS_dataset_mm10.txt -g GRCm38.fa -m ./maxEnt_models/mouse/ --prelearned_sres mouse --print_predictions
+
 # time python save_3_pickle.py -c ./canonical_datasets/canonical_dataset_GRCz11.txt -a ./allSS_datasets/allSS_dataset_GRCz11.txt -g ./GRCz11.fa -m ./maxEnt_models/zebrafish/ --prelearned_sres zebrafish --print_predictions
 
 

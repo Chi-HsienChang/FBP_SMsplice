@@ -1,0 +1,22 @@
+Gene = AL606500.1
+index = 64
+Annotated 5SS: [14]
+Annotated 3SS: [116]
+SMsplice 5SS: [14]
+SMsplice 3SS: [84]
+top_k =  1000
+Partition function (log Z): -21.030626679329764
+
+Sorted 5' Splice Sites (High to Low Probability):
+Position 14: 0.9566013548498095
+Position 16: 0.04309784831318134
+Position 42: 0.0002661859348066699
+Position 53: 3.4610902201178995e-05
+
+Sorted 3' Splice Sites (High to Low Probability):
+Position 84: 0.6973477506427167
+Position 107: 0.17743027263153954
+Position 116: 0.06733987241212352
+Position 95: 0.04707624517841728
+Position 99: 0.0093312489774029
+Position 109: 0.0014746101577992187

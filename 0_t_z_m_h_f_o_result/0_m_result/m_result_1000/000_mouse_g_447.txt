@@ -1,0 +1,18 @@
+Gene = Gm10985
+index = 447
+Annotated 5SS: [6]
+Annotated 3SS: [117]
+SMsplice 5SS: [101]
+SMsplice 3SS: [170]
+top_k =  1000
+Partition function (log Z): -22.754831359739576
+
+Sorted 5' Splice Sites (High to Low Probability):
+Position 6: 0.8198001222348477
+Position 26: 0.16912358639718456
+Position 55: 0.011076291367965948
+
+Sorted 3' Splice Sites (High to Low Probability):
+Position 109: 0.8208996299959828
+Position 69: 0.1319110547183848
+Position 117: 0.04718931528563286
