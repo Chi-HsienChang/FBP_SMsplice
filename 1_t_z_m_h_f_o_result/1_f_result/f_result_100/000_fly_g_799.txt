@@ -1,0 +1,29 @@
+Gene = CG43965
+index = 799
+Annotated 5SS: [32]
+Annotated 3SS: [93]
+SMsplice 5SS: [32]
+SMsplice 3SS: [93]
+top_k =  100
+Partition function (log Z): -5.932255619298566
+
+Sorted 5' Splice Sites (High to Low Probability):
+Position 32: 0.9536051420793046
+Position 77: 0.04627739695110405
+Position 24: 4.898084960179137e-05
+Position 15: 3.3794710570721826e-05
+Position 51: 2.1403349550788178e-05
+Position 18: 1.3280276698961346e-05
+Position 118: 6.470611130948967e-09
+Position 102: 1.253263911224653e-09
+
+Sorted 3' Splice Sites (High to Low Probability):
+Position 93: 0.9266327324910597
+Position 135: 0.06799930143589163
+Position 102: 0.005342690824809386
+Position 145: 2.0477703540703198e-05
+Position 142: 3.613667965659358e-06
+Position 210: 6.92551883429346e-07
+Position 156: 2.795934759119575e-07
+Position 217: 1.6818591646349583e-07
+Position 190: 4.9486163047268667e-08
