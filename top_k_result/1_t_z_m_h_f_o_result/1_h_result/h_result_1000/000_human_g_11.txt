@@ -1,0 +1,12 @@
+Gene = AC008914.1
+index = 11
+Annotated 5SS: [7]
+Annotated 3SS: [36]
+SMsplice 5SS: [7]
+SMsplice 3SS: [84]
+top_k =  1000
+Partition function (log Z): -inf
+
+Sorted 5' Splice Sites (High to Low Probability):
+
+Sorted 3' Splice Sites (High to Low Probability):

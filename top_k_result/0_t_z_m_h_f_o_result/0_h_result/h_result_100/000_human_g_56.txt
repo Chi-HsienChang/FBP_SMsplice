@@ -1,0 +1,15 @@
+Gene = AL353354.1
+index = 56
+Annotated 5SS: [48]
+Annotated 3SS: [121]
+SMsplice 5SS: [48]
+SMsplice 3SS: [132]
+top_k =  100
+Partition function (log Z): -26.28146397087962
+
+Sorted 5' Splice Sites (High to Low Probability):
+Position 14: 0.7499886707077956
+Position 21: 0.2500113292922023
+
+Sorted 3' Splice Sites (High to Low Probability):
+Position 85: 1.0000000000000007
