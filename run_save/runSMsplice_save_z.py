@@ -11,13 +11,12 @@ import pickle
 import time
 
 
-# time python runSMsplice_save_z.py -c ./canonical_datasets/canonical_dataset_GRCz11.txt -a ./allSS_datasets/allSS_dataset_GRCz11.txt -g ./GRCz11.fa -m ./maxEnt_models/zebrafish/ --print_predictions --learning_seed real-decoy --max_learned_weights 15 --max_learned_scores 1000 --learn_sre
-# seed = 1742583100
-# seed = 1742585034
-# seed = 1742585092
-
 # lengthfilter_canonical_dataset_GRCz11.txt
 # time python runSMsplice_save_z.py -c ./canonical_datasets/lengthfilter_canonical_dataset_GRCz11.txt -a ./allSS_datasets/allSS_dataset_GRCz11.txt -g ./GRCz11.fa -m ./maxEnt_models/zebrafish/ --print_predictions --learning_seed real-decoy --max_learned_weights 15 --max_learned_scores 1000 --learn_sre
+# seed = 1742595471
+# seed = 1742595514
+# seed = 1742595542
+
 
 my_seed = int(time.time())
 np.random.seed(my_seed)
@@ -580,55 +579,56 @@ with open(f'z_pred_all_new_{my_seed}.pkl', 'wb') as f:
     pickle.dump(data, f)
 
 
-print(f"seed = {my_seed}")
+######
+######
+######
+######
+######
+######
 
-# Get the Sensitivity and Precision
-num_truePositives = 0
-num_falsePositives = 0
-num_falseNegatives = 0
+f1_score = True
 
-for g, gene in enumerate(testGenes):
-    L = lengths[g]
-    predThrees = np.nonzero(pred_all[0][g,:L] == 3)[0]
-    trueThrees = np.nonzero(trueSeqs[gene] == B3)[0]
+predFives_all = []
+predThrees_all = []
+trueFives_all = []
+trueThrees_all = []
 
-    predFives = np.nonzero(pred_all[0][g,:L] == 5)[0]
-    trueFives = np.nonzero(trueSeqs[gene] == B5)[0]
-    
-    if args.print_predictions: 
-        print(gene)
-        print("\tAnnotated Fives:", trueFives, "Predicted Fives:", predFives)
-        print("\tAnnotated Threes:", trueThrees, "Predicted Threes:", predThrees)
-        
-    num_truePositives += len(np.intersect1d(predThrees, trueThrees)) + len(np.intersect1d(predFives, trueFives))
-    num_falsePositives += len(np.setdiff1d(predThrees, trueThrees)) + len(np.setdiff1d(predFives, trueFives))
-    num_falseNegatives += len(np.setdiff1d(trueThrees, predThrees)) + len(np.setdiff1d(trueFives, predFives))
 
-if args.print_local_scores:
-    scored_sequences_5, scored_sequences_3  = score_sequences(sequences = sequences, exonicSREs5s = exonicSREs5s, exonicSREs3s = exonicSREs3s, intronicSREs5s = intronicSREs5s, intronicSREs3s = intronicSREs3s, k = kmer, sreEffect5_exon = sreEffect5_exon, sreEffect5_intron = sreEffect5_intron, sreEffect3_exon = sreEffect3_exon, sreEffect3_intron = sreEffect3_intron, meDir = maxEntDir)
-  
+if (f1_score):
+    # Get the Sensitivity and Precision
+    num_truePositives = 0
+    num_falsePositives = 0
+    num_falseNegatives = 0
+
     for g, gene in enumerate(testGenes):
         L = lengths[g]
         predThrees = np.nonzero(pred_all[0][g,:L] == 3)[0]
+        trueThrees = np.nonzero(trueSeqs[gene] == B3)[0]
+
         predFives = np.nonzero(pred_all[0][g,:L] == 5)[0]
+        trueFives = np.nonzero(trueSeqs[gene] == B5)[0]
         
-        print(gene, "Internal Exons:")
-        for i, three in enumerate(predThrees[:-1]):
-            five = predFives[i+1]
-            print("\t", np.log2(scored_sequences_5[g,five]) + np.log2(scored_sequences_3[g,three]) + np.log2(pELM[five - three]))
-        
-        print(gene, "Introns:")
-        for i, three in enumerate(predThrees):
-            five = predFives[i]
-            print("\t", np.log2(scored_sequences_5[g,five]) + np.log2(scored_sequences_3[g,three]) + np.log2(pELM[-five + three]))
+        if args.print_predictions: 
+            print(gene)
+            print("\tAnnotated Fives:", trueFives, "Predicted Fives:", predFives)   
+            print("\tAnnotated Threes:", trueThrees, "Predicted Threes:", predThrees)
+            predFives_all.append(predFives)
+            predThrees_all.append(predThrees)
+            trueFives_all.append(trueFives)
+            trueThrees_all.append(trueThrees)     
+
+        # num_truePositives += len(np.intersect1d(predThrees, trueThrees)) + len(np.intersect1d(predFives, trueFives))
+        # num_falsePositives += len(np.setdiff1d(predThrees, trueThrees)) + len(np.setdiff1d(predFives, trueFives))
+        # num_falseNegatives += len(np.setdiff1d(trueThrees, predThrees)) + len(np.setdiff1d(trueFives, predFives))
+
+    # ssSens = num_truePositives / (num_truePositives + num_falseNegatives)
+    # ssPrec = num_truePositives / (num_truePositives + num_falsePositives)
+    # f1 = 2 / (1/ssSens + 1/ssPrec)
+    # print("Final Test Metrics", "Recall", ssSens, "Precision", ssPrec, "f1", f1) 
+    
 
 
-ssSens = num_truePositives / (num_truePositives + num_falseNegatives)
-ssPrec = num_truePositives / (num_truePositives + num_falsePositives)
-f1 = 2 / (1/ssSens + 1/ssPrec)
-print("Final Test Metrics", "Recall", ssSens, "Precision", ssPrec, "f1", f1) 
- 
-
+import pickle
 
 # Combine the prediction lists into a dictionary
 data = {
@@ -643,7 +643,7 @@ with open(f'z_predictions_new_{my_seed}.pkl', 'wb') as f:
     pickle.dump(data, f)
 
 print("Prediction data saved successfully.")
-print(f"seed = {my_seed}")
+
 
 #############
 #############
@@ -708,6 +708,187 @@ data = {
 with open(f'z_new_{my_seed}.pkl', 'wb') as f:
     pickle.dump(data, f)
 
+
+
+
+# Get the Sensitivity and Precision
+num_truePositives = 0
+num_falsePositives = 0
+num_falseNegatives = 0
+
+for g, gene in enumerate(testGenes):
+    L = lengths[g]
+    predThrees = np.nonzero(pred_all[0][g,:L] == 3)[0]
+    trueThrees = np.nonzero(trueSeqs[gene] == B3)[0]
+
+    predFives = np.nonzero(pred_all[0][g,:L] == 5)[0]
+    trueFives = np.nonzero(trueSeqs[gene] == B5)[0]
+    
+    if args.print_predictions: 
+        print(gene)
+        print("\tAnnotated Fives:", trueFives, "Predicted Fives:", predFives)
+        print("\tAnnotated Threes:", trueThrees, "Predicted Threes:", predThrees)
+        
+    num_truePositives += len(np.intersect1d(predThrees, trueThrees)) + len(np.intersect1d(predFives, trueFives))
+    num_falsePositives += len(np.setdiff1d(predThrees, trueThrees)) + len(np.setdiff1d(predFives, trueFives))
+    num_falseNegatives += len(np.setdiff1d(trueThrees, predThrees)) + len(np.setdiff1d(trueFives, predFives))
+
+if args.print_local_scores:
+    scored_sequences_5, scored_sequences_3  = score_sequences(sequences = sequences, exonicSREs5s = exonicSREs5s, exonicSREs3s = exonicSREs3s, intronicSREs5s = intronicSREs5s, intronicSREs3s = intronicSREs3s, k = kmer, sreEffect5_exon = sreEffect5_exon, sreEffect5_intron = sreEffect5_intron, sreEffect3_exon = sreEffect3_exon, sreEffect3_intron = sreEffect3_intron, meDir = maxEntDir)
+  
+    for g, gene in enumerate(testGenes):
+        L = lengths[g]
+        predThrees = np.nonzero(pred_all[0][g,:L] == 3)[0]
+        predFives = np.nonzero(pred_all[0][g,:L] == 5)[0]
+        
+        print(gene, "Internal Exons:")
+        for i, three in enumerate(predThrees[:-1]):
+            five = predFives[i+1]
+            print("\t", np.log2(scored_sequences_5[g,five]) + np.log2(scored_sequences_3[g,three]) + np.log2(pELM[five - three]))
+        
+        print(gene, "Introns:")
+        for i, three in enumerate(predThrees):
+            five = predFives[i]
+            print("\t", np.log2(scored_sequences_5[g,five]) + np.log2(scored_sequences_3[g,three]) + np.log2(pELM[-five + three]))
+
+
+ssSens = num_truePositives / (num_truePositives + num_falseNegatives)
+ssPrec = num_truePositives / (num_truePositives + num_falsePositives)
+f1 = 2 / (1/ssSens + 1/ssPrec)
+
 print(f"seed = {my_seed}")
 print("len(testGene) = ", len(testGenes))
 print("Final Test Metrics", "Recall", ssSens, "Precision", ssPrec, "f1", f1) 
+
+
+# print(f"seed = {my_seed}")
+
+# # Get the Sensitivity and Precision
+# num_truePositives = 0
+# num_falsePositives = 0
+# num_falseNegatives = 0
+
+# for g, gene in enumerate(testGenes):
+#     L = lengths[g]
+#     predThrees = np.nonzero(pred_all[0][g,:L] == 3)[0]
+#     trueThrees = np.nonzero(trueSeqs[gene] == B3)[0]
+
+#     predFives = np.nonzero(pred_all[0][g,:L] == 5)[0]
+#     trueFives = np.nonzero(trueSeqs[gene] == B5)[0]
+    
+#     if args.print_predictions: 
+#         print(gene)
+#         print("\tAnnotated Fives:", trueFives, "Predicted Fives:", predFives)
+#         print("\tAnnotated Threes:", trueThrees, "Predicted Threes:", predThrees)
+        
+#     num_truePositives += len(np.intersect1d(predThrees, trueThrees)) + len(np.intersect1d(predFives, trueFives))
+#     num_falsePositives += len(np.setdiff1d(predThrees, trueThrees)) + len(np.setdiff1d(predFives, trueFives))
+#     num_falseNegatives += len(np.setdiff1d(trueThrees, predThrees)) + len(np.setdiff1d(trueFives, predFives))
+
+# if args.print_local_scores:
+#     scored_sequences_5, scored_sequences_3  = score_sequences(sequences = sequences, exonicSREs5s = exonicSREs5s, exonicSREs3s = exonicSREs3s, intronicSREs5s = intronicSREs5s, intronicSREs3s = intronicSREs3s, k = kmer, sreEffect5_exon = sreEffect5_exon, sreEffect5_intron = sreEffect5_intron, sreEffect3_exon = sreEffect3_exon, sreEffect3_intron = sreEffect3_intron, meDir = maxEntDir)
+  
+#     for g, gene in enumerate(testGenes):
+#         L = lengths[g]
+#         predThrees = np.nonzero(pred_all[0][g,:L] == 3)[0]
+#         predFives = np.nonzero(pred_all[0][g,:L] == 5)[0]
+        
+#         print(gene, "Internal Exons:")
+#         for i, three in enumerate(predThrees[:-1]):
+#             five = predFives[i+1]
+#             print("\t", np.log2(scored_sequences_5[g,five]) + np.log2(scored_sequences_3[g,three]) + np.log2(pELM[five - three]))
+        
+#         print(gene, "Introns:")
+#         for i, three in enumerate(predThrees):
+#             five = predFives[i]
+#             print("\t", np.log2(scored_sequences_5[g,five]) + np.log2(scored_sequences_3[g,three]) + np.log2(pELM[-five + three]))
+
+
+# ssSens = num_truePositives / (num_truePositives + num_falseNegatives)
+# ssPrec = num_truePositives / (num_truePositives + num_falsePositives)
+# f1 = 2 / (1/ssSens + 1/ssPrec)
+# print("Final Test Metrics", "Recall", ssSens, "Precision", ssPrec, "f1", f1) 
+ 
+
+
+# # Combine the prediction lists into a dictionary
+# data = {
+#     'predFives_all': predFives_all,
+#     'predThrees_all': predThrees_all,
+#     'trueFives_all': trueFives_all,
+#     'trueThrees_all': trueThrees_all
+# }
+
+
+# with open(f'z_predictions_new_{my_seed}.pkl', 'wb') as f:
+#     pickle.dump(data, f)
+
+# print("Prediction data saved successfully.")
+# print(f"seed = {my_seed}")
+
+# #############
+# #############
+# #############
+# #############
+# #############
+# #############
+
+# transitions = np.log(transitions)
+# pIL = np.log(pIL)
+# pELS = np.log(pELS)
+# pELF = np.log(pELF)
+# pELM = np.log(pELM)
+# pELL = np.log(pELL)
+
+
+# pME = transitions[0]
+# p1E = np.log(1 - np.exp(pME))
+# pEE = transitions[1]
+# pEO = np.log(1 - np.exp(pEE))
+
+
+
+# emissions5, emissions3 = emissions(sequences = sequences, exonicSREs5s = exonicSREs5s, exonicSREs3s = exonicSREs3s, intronicSREs5s = intronicSREs5s, intronicSREs3s = intronicSREs3s, k = kmer, sreEffect5_exon = sreEffect5_exon, sreEffect5_intron = sreEffect5_intron, sreEffect3_exon = sreEffect3_exon, sreEffect3_intron = sreEffect3_intron, meDir = maxEntDir)
+
+
+# # Combine all the variables into a dictionary
+# import pickle
+
+# # 建立包含所有變數的字典
+# data = {
+#     'sequences': sequences,
+#     'pME': pME,
+#     'pELF': pELF,
+#     'pIL': pIL,
+#     'pEE': pEE,
+#     'pELM': pELM,
+#     'pEO': pEO,
+#     'pELL': pELL,
+#     'emissions5': emissions5,
+#     'emissions3': emissions3,
+#     'lengths': lengths,
+#     'trueSeqs': trueSeqs,
+#     'testGenes': testGenes,
+#     'B3': B3,
+#     'B5': B5,
+#     'transitions': transitions,
+#     'pELS': pELS,
+#     'exonicSREs5s': exonicSREs5s,
+#     'exonicSREs3s': exonicSREs3s,
+#     'intronicSREs5s': intronicSREs5s,
+#     'intronicSREs3s': intronicSREs3s,
+#     'kmer': kmer,
+#     'sreEffect5_exon': sreEffect5_exon,
+#     'sreEffect5_intron': sreEffect5_intron,
+#     'sreEffect3_exon': sreEffect3_exon,
+#     'sreEffect3_intron': sreEffect3_intron,
+#     'maxEntDir': maxEntDir
+# }
+
+# # 將字典儲存到 pickle 檔案
+# with open(f'z_new_{my_seed}.pkl', 'wb') as f:
+#     pickle.dump(data, f)
+
+# print(f"seed = {my_seed}")
+# print("len(testGene) = ", len(testGenes))
+# print("Final Test Metrics", "Recall", ssSens, "Precision", ssPrec, "f1", f1) 
