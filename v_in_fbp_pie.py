@@ -12,7 +12,9 @@ species_names = {
     "t": "Arabidopsis",
     "z": "Zebrafish",
     "m": "Mouse",
-    "h": "Human"
+    "h": "Human",
+    "f": "Fly",
+    "o": "Moth"
 }
 
 # 檢查命令列參數：dataset 與 top_k
@@ -21,7 +23,7 @@ if len(sys.argv) < 3:
     sys.exit(1)
 dataset_arg = sys.argv[1]   # 若指定 "all" 則處理所有物種
 top_k = int(sys.argv[2])
-my_seed = 0
+my_seed = int(sys.argv[3])
 print(my_seed)
 
 
@@ -111,6 +113,11 @@ def get_files_for_topk(dataset, top_k_val):
         pattern = f"./{my_seed}_m_result/m_result_{top_k_val}/000_mouse_g_*.txt"
     elif dataset == "h":
         pattern = f"./{my_seed}_h_result/h_result_{top_k_val}/000_human_g_*.txt"
+    elif dataset == "f":
+        pattern = f"./{my_seed}_f_result/f_result_{top_k_val}/000_fly_g_*.txt"
+    elif dataset == "o":
+        pattern = f"./{my_seed}_o_result/o_result_{top_k_val}/000_moth_g_*.txt"
+
     else:
         print("未知 dataset")
         return []
@@ -210,7 +217,7 @@ def save_bin_info_to_csv(dataset, top_k_val, threshold):
     """
     files = get_files_for_topk(dataset, top_k_val)
     bin_info_df = get_bin_info(files, threshold)
-    outcsv = f"./{my_seed}_{dataset}_result/bin_info_top{top_k_val}_thr{threshold:.2f}.csv"
+    outcsv = f"../{my_seed}_{dataset}_top_{top_k_val}.csv"
     os.makedirs(os.path.dirname(outcsv), exist_ok=True)
     bin_info_df.to_csv(outcsv)
     print(f"Bin info saved to {outcsv}")
@@ -328,7 +335,7 @@ def main():
             bin_info_df = get_bin_info(get_files_for_topk(code, top_k), 0.00)
             save_bin_info_to_csv(code, top_k, 0.00)
     # 繪製所有物種圖形：每個 species 左側圓餅圖、右側直方圖
-    plot_all_species_pies(top_k, 0.00)
+    # plot_all_species_pies(top_k, 0.00)
 
 
 if __name__ == "__main__":
