@@ -139,6 +139,10 @@ for seed in tqdm(seeds):
                 for a, b in sm_pairs:
                     p3 = prob3SS(a, df, method="smsplice")
                     p5 = prob5SS(b, df, method="smsplice")
+
+                    if p3 == 0 or p5 == 0:
+                        continue
+                    
                     score = p3 * p5
 
                     if (a == 0) and (b in ann5ss):
