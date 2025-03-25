@@ -1,0 +1,18 @@
+Gene = Gm17304
+index = 457
+Annotated 5SS: [53]
+Annotated 3SS: [87]
+SMsplice 5SS: [8]
+SMsplice 3SS: [83]
+Partition function (log Z): -27.858411854731713
+
+Sorted 5' Splice Sites (High to Low Probability):
+Position 8: 0.9764155259540876
+Position 23: 0.023584474045914745
+
+Sorted 3' Splice Sites (High to Low Probability):
+Position 83: 0.33705052541297553
+Position 73: 0.3196702959987132
+Position 92: 0.17840787600796934
+Position 87: 0.1463915813498897
+Position 94: 0.018479721230452027
