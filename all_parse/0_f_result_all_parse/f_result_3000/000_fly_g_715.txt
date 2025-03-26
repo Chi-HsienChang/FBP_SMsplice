@@ -1,0 +1,27 @@
+Gene = CG42852
+index = 715
+Annotated 5SS: [36]
+Annotated 3SS: [102]
+SMsplice 5SS: [36]
+SMsplice 3SS: [102]
+Partition function (log Z): -1.800011861283577
+
+Sorted 5' Splice Sites (High to Low Probability):
+Position 36: 0.9999938852667205
+Position 40: 5.662733369625381e-06
+Position 70: 4.5110619269316435e-07
+Position 157: 2.8623887533705675e-07
+Position 148: 1.9770673258198884e-07
+Position 162: 9.870419204274298e-08
+Position 183: 3.363004145043165e-09
+Position 151: 3.6607405802394875e-10
+Position 139: 1.3776758346992443e-12
+Position 123: 1.4044055359202837e-13
+
+Sorted 3' Splice Sites (High to Low Probability):
+Position 102: 0.9940082411692043
+Position 117: 0.005965381606961395
+Position 147: 1.0763988788427418e-05
+Position 131: 7.897057937995182e-06
+Position 144: 7.687013030946384e-06
+Position 226: 6.14650755658718e-07
