@@ -1,0 +1,12 @@
+Gene = AC008914.1
+index = 11
+Annotated 5SS: [7]
+Annotated 3SS: [36]
+SMsplice 5SS: [7]
+SMsplice 3SS: [84]
+length: 102
+length: 102
+Partition function (logZ) = -inf
+#Exons = 1
+3SS, 5SS, prob
+0, 100, 1.0

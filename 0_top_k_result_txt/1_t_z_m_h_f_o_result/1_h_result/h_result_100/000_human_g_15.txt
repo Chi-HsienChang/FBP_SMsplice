@@ -1,0 +1,25 @@
+Gene = AC073063.1
+index = 15
+Annotated 5SS: [25]
+Annotated 3SS: [169]
+SMsplice 5SS: [67]
+SMsplice 3SS: [159]
+top_k =  100
+Partition function (log Z): -25.115184018556402
+
+Sorted 5' Splice Sites (High to Low Probability):
+Position 67: 0.5076252886629304
+Position 9: 0.23223399682467505
+Position 33: 0.1675442237982874
+Position 12: 0.08115106041704519
+Position 18: 0.011445430297060235
+
+Sorted 3' Splice Sites (High to Low Probability):
+Position 159: 0.4485743701382024
+Position 84: 0.26423319389325683
+Position 149: 0.16103344526214286
+Position 169: 0.09838547227485078
+Position 176: 0.017137433283814577
+Position 102: 0.006644493695928046
+Position 126: 0.0032918181096555973
+Position 104: 0.0006997733421472965

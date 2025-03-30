@@ -1,0 +1,25 @@
+Top k = 100
+  Viterbi Metrics:
+    Recall   : 0.71646432
+    Precision: 0.74255754
+    F1       : 0.72927760
+  Threshold Metrics:
+    Threshold 0.95 -> Recall: 0.19307077, Precision: 0.95182482, F1: 32.10241260%
+    Threshold 0.90 -> Recall: 0.26132662, Precision: 0.94083156, F1: 40.90382387%
+    Threshold 0.85 -> Recall: 0.30470832, Precision: 0.92828146, F1: 45.88117267%
+    Threshold 0.80 -> Recall: 0.33777515, Precision: 0.91619813, F1: 49.35814222%
+    Threshold 0.75 -> Recall: 0.36723917, Precision: 0.90204873, F1: 52.19739750%
+    Threshold 0.70 -> Recall: 0.39023788, Precision: 0.88942632, F1: 54.24670692%
+    Threshold 0.65 -> Recall: 0.41294048, Precision: 0.87438604, F1: 56.09600751%
+    Threshold 0.60 -> Recall: 0.43233639, Precision: 0.85899196, F1: 57.51805647%
+    Threshold 0.55 -> Recall: 0.45000494, Precision: 0.84067859, F1: 58.62157644%
+    Threshold 0.50 -> Recall: 0.46648899, Precision: 0.82069984, F1: 59.48582397%
+    Threshold 0.45 -> Recall: 0.48094956, Precision: 0.79668084, F1: 59.98030406%
+    Threshold 0.40 -> Recall: 0.49491659, Precision: 0.77382514, F1: 60.37145179%
+    Threshold 0.35 -> Recall: 0.50922910, Precision: 0.74649110, F1: 60.54453703%
+    Threshold 0.30 -> Recall: 0.52290001, Precision: 0.71423756, F1: 60.37725097%
+    Threshold 0.25 -> Recall: 0.53533708, Precision: 0.67439692, F1: 59.68744841%
+    Threshold 0.20 -> Recall: 0.54930412, Precision: 0.63063063, F1: 58.71646752%
+    Threshold 0.15 -> Recall: 0.56297503, Precision: 0.57411042, F1: 56.84882011%
+    Threshold 0.10 -> Recall: 0.57763301, Precision: 0.50147821, F1: 53.68684204%
+

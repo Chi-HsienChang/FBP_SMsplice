@@ -1,0 +1,14 @@
+Gene = AL353354.1
+index = 56
+Annotated 5SS: [48]
+Annotated 3SS: [121]
+SMsplice 5SS: [48]
+SMsplice 3SS: [132]
+length: 140
+length: 140
+Partition function (logZ) = -26.28146397087962
+#Exons = 3
+3SS, 5SS, prob
+85, -1, 1.0000000000000007
+0, 14, 0.7499886707077956
+0, 21, 0.2500113292922023
